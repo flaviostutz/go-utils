@@ -8,7 +8,10 @@ import (
 	"io/ioutil"
 )
 
-func parseKeyFromPEM(pemFile string, private bool) (interface{}, error) {
+//ParseKeyFromPEM Load public or private key from PEM file path.
+//According to PEM Block name it will try to load a key with different types.
+//If 'private', try to load a private key, else, load public keys.
+func ParseKeyFromPEM(pemFile string, private bool) (interface{}, error) {
 	pemFileContents, err := ioutil.ReadFile(pemFile)
 	if err != nil {
 		return nil, fmt.Errorf("Couldn't read pem file contents. err=%s", err)
